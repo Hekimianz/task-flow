@@ -1,5 +1,7 @@
 import { registerAs } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import Task from 'src/tasks/tasks.entity';
+import User from 'src/users/users.entity';
 
 export const typeOrmConfig = registerAs(
   'database',
@@ -10,5 +12,7 @@ export const typeOrmConfig = registerAs(
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
+    entities: [User, Task],
+    synchronize: Number(process.env.DB_SYNC) === 1,
   }),
 );
