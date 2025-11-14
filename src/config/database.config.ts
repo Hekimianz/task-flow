@@ -14,5 +14,6 @@ export const typeOrmConfig = registerAs(
     database: process.env.DB_DATABASE,
     entities: [User, Task],
     synchronize: Number(process.env.DB_SYNC) === 1,
+    dropSchema: Number(process.env.DB_DROP) === 1,
   }),
 );

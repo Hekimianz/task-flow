@@ -4,43 +4,46 @@ import {
   Delete,
   Get,
   Param,
+  ParseUUIDPipe,
   Patch,
   Post,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
-import type ITask from './task.model';
 import CreateTaskDto from './DTOs/create-task.dto';
 import UpdateTaskDto from './DTOs/update-task.dto';
+import Task from './tasks.entity';
 
 @Controller('tasks')
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
   @Get()
-  public findAll(): ITask[] {
+  public findAll(): Promise<Task[]> {
     return this.tasksService.findAll();
   }
 
   @Get(':id')
-  public findById(@Param('id') id: string): ITask {
+  public findById(@Param('id', new ParseUUIDPipe()) id: string): Promise<Task> {
     return this.tasksService.findById(id);
   }
 
   @Post()
-  public createTask(@Body() createTaskDto: CreateTaskDto): ITask {
+  public createTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
     return this.tasksService.createTask(createTaskDto);
   }
 
   @Patch(':id')
   public updateTask(
-    @Param('id') id: string,
+    @Param('id', new ParseUUIDPipe()) id: string,
     @Body() updateTaskDto: UpdateTaskDto,
-  ): ITask {
+  ): Promise<Task> {
     return this.tasksService.updateTask(id, updateTaskDto);
   }
 
-  @Delete(':xid')
-  public deleteTask(@Param('id') id: string): string {
+  @Delete(':id')
+  public deleteTask(
+    @Param('id', new ParseUUIDPipe()) id: string,
+  ): Promise<string> {
     return this.tasksService.deleteTask(id);
   }
 }

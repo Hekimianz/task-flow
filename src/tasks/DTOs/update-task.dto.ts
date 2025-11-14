@@ -1,5 +1,5 @@
 import {
-  IsDate,
+  IsDateString,
   IsEnum,
   IsNotEmpty,
   IsOptional,
@@ -23,8 +23,8 @@ export default class UpdateTaskDto {
   @IsOptional()
   priority?: Priority;
 
-  @IsDate()
-  @IsNotEmpty()
   @IsOptional()
-  dueDate?: Date;
+  @IsNotEmpty()
+  @IsDateString()
+  dueDate?: string;
 }

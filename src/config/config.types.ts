@@ -15,4 +15,5 @@ export const configSchema = Joi.object({
   DB_PASSWORD: Joi.string().required(),
   DB_DATABASE: Joi.string().required(),
   DB_SYNC: Joi.number().valid(0, 1).default(0),
+  DB_DROP: Joi.number().valid(0, 1).default(0),
 });

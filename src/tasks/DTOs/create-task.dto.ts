@@ -1,4 +1,4 @@
-import { IsDate, IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { IsDateString, IsEnum, IsNotEmpty, IsString } from 'class-validator';
 import { Priority } from '../task.model';
 
 export default class CreateTaskDto {
@@ -14,15 +14,17 @@ export default class CreateTaskDto {
   @IsNotEmpty()
   priority: Priority;
 
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
-  dueDate: Date;
+  dueDate: string;
 
   @IsString()
+  // @IsUUID()
   @IsNotEmpty()
   createdById: string;
 
   @IsString()
   @IsNotEmpty()
+  // @IsUUID()
   assignedToId: string;
 }

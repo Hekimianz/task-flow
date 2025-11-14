@@ -1,4 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Priority, Status } from './task.model';
 
 @Entity()
@@ -12,27 +18,27 @@ export default class Task {
   @Column()
   description: string;
 
-  @Column()
+  @Column({ type: 'enum', enum: Status })
   status: Status;
 
-  @Column()
+  @Column({ type: 'enum', enum: Priority })
   priority: Priority;
 
-  @Column()
+  @Column({ type: 'timestamp' })
   dueDate: Date;
 
   @Column()
   createdById: string;
 
-  @Column()
+  @Column({ nullable: true })
   assignedToId: string;
 
-  @Column()
+  @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 
-  @Column()
+  @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
 
-  @Column()
+  @Column({ type: 'timestamp', nullable: true })
   completedAt: Date;
 }
