@@ -5,7 +5,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
-import { Priority } from '../task.model';
+import { Priority } from '../tasks.enum';
 
 export default class UpdateTaskDto {
   @IsString()

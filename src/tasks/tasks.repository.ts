@@ -3,8 +3,9 @@ import { Repository } from 'typeorm';
 import Task from './tasks.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import CreateTaskDto from './DTOs/create-task.dto';
-import { Status } from './task.model';
+
 import UpdateTaskDto from './DTOs/update-task.dto';
+import { Status } from './tasks.enum';
 
 @Injectable()
 export default class TasksRepository {

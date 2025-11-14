@@ -1,5 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { Role } from './users.model';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Role } from './users.enum';
+import { IsDateString } from 'class-validator';
 
 @Entity()
 export default class User {
@@ -18,15 +25,17 @@ export default class User {
   @Column()
   lastName: string;
 
-  @Column()
+  @Column({ type: 'enum', enum: Role })
   role: Role;
 
   @Column()
   isActive: boolean;
 
-  @Column()
-  createdAt: Date;
+  @CreateDateColumn()
+  @IsDateString()
+  createdAt: string;
 
-  @Column()
-  updatedAt: Date;
+  @UpdateDateColumn()
+  @IsDateString()
+  updatedAt: string;
 }

@@ -19,8 +19,7 @@ export class TasksService {
 
   public async findById(id: string): Promise<Task> {
     const task = await this.tasksRepository.findById(id);
-    if (!task) throw new NotFoundException(`No task with the id ${id} found.`);
-    return task;
+    return task ?? this.notFound(id);
   }
 
   public async createTask(dto: CreateTaskDto): Promise<Task> {
@@ -34,15 +33,16 @@ export class TasksService {
 
   public async updateTask(id: string, dto: UpdateTaskDto): Promise<Task> {
     const updatedTask = await this.tasksRepository.updateTask(id, dto);
-    if (!updatedTask)
-      throw new NotFoundException(`No task with the id ${id} found.`);
-    return updatedTask;
+    return updatedTask ?? this.notFound(id);
   }
 
   public async deleteTask(id: string): Promise<string> {
     const deleted = await this.tasksRepository.deleteTask(id);
-    if (!deleted)
-      throw new NotFoundException(`No task with the id ${id} found.`);
+    if (!deleted) this.notFound(id);
     return 'Task deleted.';
+  }
+
+  private notFound(id: string): never {
+    throw new NotFoundException(`No task with the id ${id} found.`);
   }
 }

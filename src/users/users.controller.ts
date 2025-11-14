@@ -1,19 +1,19 @@
 import { Body, Controller, Delete, Get, Param, Patch } from '@nestjs/common';
 import { UsersService } from './users.service';
-import type IUser from './users.model';
 import UpdateUserDto from './DTOs/update-user.dto';
+import User from './users.entity';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
-  public findAll(): IUser[] {
+  public findAll(): Promise<User[]> {
     return this.usersService.findAll();
   }
 
   @Get(':id')
-  public findById(@Param('id') id: string): IUser {
+  public findById(@Param('id') id: string): Promise<User> {
     return this.usersService.findById(id);
   }
 
@@ -21,12 +21,12 @@ export class UsersController {
   public updateUser(
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
-  ): IUser {
+  ): Promise<User> {
     return this.usersService.updateUser(id, updateUserDto);
   }
 
   @Delete(':id')
-  public deleteUser(@Param('id') id: string): string {
+  public deleteUser(@Param('id') id: string): Promise<string> {
     return this.usersService.deleteUser(id);
   }
 }
