@@ -46,6 +46,14 @@ export default class TasksRepository {
     return await this.tasksRepository.save(task);
   }
 
+  public async completeTask(id: string): Promise<Task | null> {
+    const task = await this.findOneOrNull(id);
+    if (!task) return null;
+    task.status = Status.COMPLETED;
+    task.completedAt = new Date().toISOString();
+    return await this.tasksRepository.save(task);
+  }
+
   public async deleteTask(id: string): Promise<boolean> {
     const result = await this.tasksRepository.delete(id);
     return !!result.affected;

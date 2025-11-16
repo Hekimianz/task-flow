@@ -40,6 +40,13 @@ export class TasksController {
     return this.tasksService.updateTask(id, updateTaskDto);
   }
 
+  @Patch('/complete/:id')
+  public completeTask(
+    @Param('id', new ParseUUIDPipe()) id: string,
+  ): Promise<Task> {
+    return this.tasksService.completeTask(id);
+  }
+
   @Delete(':id')
   public deleteTask(
     @Param('id', new ParseUUIDPipe()) id: string,

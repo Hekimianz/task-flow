@@ -6,36 +6,40 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Role } from './users.enum';
-import { IsDateString } from 'class-validator';
+import {
+  IsDateString,
+  IsEmail,
+  Matches,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 @Entity()
 export default class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 100, nullable: false })
   email: string;
 
-  @Column()
+  @Column({ nullable: false })
   password: string;
 
-  @Column()
+  @Column({ nullable: false, length: 50 })
   firstName: string;
 
-  @Column()
+  @Column({ nullable: false, length: 50 })
   lastName: string;
 
-  @Column({ type: 'enum', enum: Role })
+  @Column({ type: 'enum', enum: Role, nullable: false })
   role: Role;
 
   @Column()
   isActive: boolean;
 
-  @CreateDateColumn()
-  @IsDateString()
+  @CreateDateColumn({ nullable: false })
   createdAt: string;
 
   @UpdateDateColumn()
-  @IsDateString()
   updatedAt: string;
 }

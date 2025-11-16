@@ -36,6 +36,11 @@ export class TasksService {
     return updatedTask ?? this.notFound(id);
   }
 
+  public async completeTask(id: string): Promise<Task> {
+    const completedTask = await this.tasksRepository.completeTask(id);
+    return completedTask ?? this.notFound(id);
+  }
+
   public async deleteTask(id: string): Promise<string> {
     const deleted = await this.tasksRepository.deleteTask(id);
     if (!deleted) this.notFound(id);

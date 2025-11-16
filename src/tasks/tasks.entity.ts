@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Priority, Status } from './tasks.enum';
+import { IsDateString } from 'class-validator';
 
 @Entity()
 export default class Task {
@@ -25,7 +26,8 @@ export default class Task {
   priority: Priority;
 
   @Column({ type: 'timestamp' })
-  dueDate: Date;
+  @IsDateString()
+  dueDate: string;
 
   @Column()
   createdById: string;
@@ -34,11 +36,14 @@ export default class Task {
   assignedToId: string;
 
   @CreateDateColumn({ type: 'timestamp' })
-  createdAt: Date;
+  @IsDateString()
+  createdAt: string;
 
   @UpdateDateColumn({ type: 'timestamp' })
-  updatedAt: Date;
+  @IsDateString()
+  updatedAt: string;
 
   @Column({ type: 'timestamp', nullable: true })
-  completedAt: Date;
+  @IsDateString()
+  completedAt: string;
 }

@@ -1,13 +1,25 @@
-import { IsDateString, IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsDateString,
+  IsEnum,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 import { Priority } from '../tasks.enum';
+import { IsFutureDate } from '../is-future-date.validator';
 
 export default class CreateTaskDto {
   @IsString()
   @IsNotEmpty()
+  @MinLength(3)
+  @MaxLength(100)
   title: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
+  @MaxLength(500)
   description: string;
 
   @IsEnum(Priority)
@@ -16,6 +28,7 @@ export default class CreateTaskDto {
 
   @IsDateString()
   @IsNotEmpty()
+  @IsFutureDate({ message: 'dueDate must be a future date' })
   dueDate: string;
 
   @IsString()
