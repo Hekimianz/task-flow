@@ -6,6 +6,7 @@ import { environmentVariables } from './config/environment.config';
 import { configSchema, ConfigType } from './config/config.types';
 import { typeOrmConfig } from './config/database.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SeederModule } from './seeder/seeder.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
     TasksModule,
     UsersModule,
+    SeederModule,
   ],
   controllers: [],
   providers: [],

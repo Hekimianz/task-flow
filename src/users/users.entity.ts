@@ -6,13 +6,6 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Role } from './users.enum';
-import {
-  IsDateString,
-  IsEmail,
-  Matches,
-  MaxLength,
-  MinLength,
-} from 'class-validator';
 
 @Entity()
 export default class User {
