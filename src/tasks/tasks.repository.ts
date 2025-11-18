@@ -30,7 +30,7 @@ export default class TasksRepository {
       priority: dto.priority,
       dueDate: dto.dueDate,
       createdById: dto.createdById,
-      assignedToId: dto.assignedToId ?? null,
+      assignedToId: dto.assignedToId ?? dto.createdById,
       status: Status.OPEN,
     });
     return await this.tasksRepository.save(newTask);

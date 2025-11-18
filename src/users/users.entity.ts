@@ -7,6 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Role } from './users.enum';
+<<<<<<< HEAD
 import {
   IsDateString,
   IsEmail,
@@ -15,6 +16,8 @@ import {
   MinLength,
 } from 'class-validator';
 import Task from 'src/tasks/tasks.entity';
+=======
+>>>>>>> e45e7d3e08461ac7b43d00206b37a9f3524a8951
 
 @Entity()
 export default class User {

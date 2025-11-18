@@ -1,7 +1,7 @@
 import { registerAs } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import Task from 'src/tasks/tasks.entity';
-import User from 'src/users/users.entity';
+import Task from '../tasks/tasks.entity';
+import User from '../users/users.entity';
 
 export const typeOrmConfig = registerAs(
   'database',

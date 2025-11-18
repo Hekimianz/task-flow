@@ -4,6 +4,7 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  IsUUID,
   MaxLength,
   MinLength,
 } from 'class-validator';
@@ -31,13 +32,12 @@ export default class CreateTaskDto {
   @IsFutureDate({ message: 'dueDate must be a future date' })
   dueDate: string;
 
-  @IsString()
-  // @IsUUID()
+  @IsUUID()
   @IsNotEmpty()
   createdById: string;
 
   @IsString()
-  @IsNotEmpty()
-  // @IsUUID()
+  @IsOptional()
+  @IsUUID()
   assignedToId: string;
 }
