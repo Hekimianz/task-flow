@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -13,6 +14,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
+import Task from 'src/tasks/tasks.entity';
 
 @Entity()
 export default class User {
@@ -42,4 +44,7 @@ export default class User {
 
   @UpdateDateColumn()
   updatedAt: string;
+
+  @OneToMany(() => Task, (task) => task.createdById)
+  tasks: Task[];
 }

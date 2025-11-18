@@ -2,11 +2,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Priority, Status } from './tasks.enum';
 import { IsDateString } from 'class-validator';
+import User from 'src/users/users.entity';
 
 @Entity()
 export default class Task {
@@ -29,9 +31,6 @@ export default class Task {
   @IsDateString()
   dueDate: string;
 
-  @Column()
-  createdById: string;
-
   @Column({ nullable: true })
   assignedToId: string;
 
@@ -46,4 +45,7 @@ export default class Task {
   @Column({ type: 'timestamp', nullable: true })
   @IsDateString()
   completedAt: string;
+
+  @ManyToOne(() => User, (user) => user.tasks, { nullable: false })
+  createdById: string;
 }
